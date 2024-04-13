@@ -16,7 +16,7 @@ from utils import smooth_move_to, find_pic
 
 
 def auto_login(url, account_input_xpath, password_input_xpath, login_btn_xpath, username, password, is_wait,
-               wait_ele_xpath, big_img_xpath, small_img_xpath):
+               wait_ele_xpath, big_img_xpath, small_img_xpath, scale):
     # Options类实例化
     chrome_options = Options()
     ua = UserAgent()
@@ -77,11 +77,11 @@ def auto_login(url, account_input_xpath, password_input_xpath, login_btn_xpath, 
         x = find_pic('resources/big.png', 'resources/small.png')
         print(x)
         # 真实尺寸和渲染尺寸有偏差：在浏览器通过调试工具elements将render size / Intrinsic size
-        x = (x * (242 / 360))
+        x = (x * (242 / 360)) * scale
         print(f'实际需要移动:{x}')
 
-        offset_x = (smallimg.location.get('x')) + 22
-        offset_y = (smallimg.location.get('y')) + 164 + 26
+        offset_x = (smallimg.location.get('x') * scale) + 22
+        offset_y = (smallimg.location.get('y') * scale) + 164 + 26
         print(f'offset_x:{offset_x}')
         print(offset_x, offset_y)
 
