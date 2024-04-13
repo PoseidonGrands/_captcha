@@ -44,6 +44,7 @@ def auto_login(url, account_input_xpath, password_input_xpath, login_btn_xpath, 
     password_input.send_keys(password)
     login_btn.click()
 
+    # 是否需要等待验证码元素出现
     if is_wait:
         WebDriverWait(browser, 2).until(
             EC.presence_of_element_located((By.XPATH, wait_ele_xpath))
